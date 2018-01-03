@@ -4,6 +4,7 @@ const program = require('commander')
 const path = require('path')
 const fs = require('fs')
 const glob = require('glob')
+const download = require('../lib/download')
 
 program.usage('<project-name>').parse(process.argv)
 
@@ -35,5 +36,5 @@ if(list.length){
 go()
 
 function go () {
-    console.log(path.resolve(process.cwd(),path.join('.',rootName)))
+    download(rootName).then(target => console.log(target)).catch(err => console.log(err)))
 }
